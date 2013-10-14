@@ -1,5 +1,5 @@
 "============================================================================
-"File:        jslint.vim
+"File:        jslint4java.vim
 "Description: Javascript syntax checker - using jslint
 "Maintainer:  Martin Grenfell <martin.grenfell at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
@@ -16,11 +16,14 @@ endif
 let g:loaded_syntastic_javascript_jslint_checker=1
 
 if !exists("g:syntastic_javascript_jslint4java_conf")
-    let g:syntastic_javascript_jslint_conf = ""
+    let g:syntastic_javascript_jslint_conf = "--nomen --sloppy --maxerr 50 --regexp --bitwise --vars --white"
 endif
 
 function! SyntaxCheckers_javascript_jslint4java_IsAvailable()
-    return executable('jslint')
+    if executable('java')
+        return filereadable($JSLINT4JAVA)
+    endif
+    return 0
 endfunction
 
 function! SyntaxCheckers_javascript_jslint4java_HighlightTerm(error)
@@ -31,7 +34,7 @@ endfunction
 
 function! SyntaxCheckers_javascript_jslint4java_GetLocList()
     let makeprg = syntastic#makeprg#build({
-        \ 'exe': 'jslint',
+        \ 'exe': 'java -jar ' . $JSLINT4JAVA,
         \ 'args': g:syntastic_javascript_jslint_conf,
         \ 'filetype': 'javascript',
         \ 'subchecker': 'jslint' })
