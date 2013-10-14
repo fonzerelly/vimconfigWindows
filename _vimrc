@@ -52,3 +52,5 @@ let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': [] }
 let g:syntastic_javascript_checkers = ['jslint4java']
+map - ddp
+map _ ddkP
