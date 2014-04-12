@@ -15,10 +15,12 @@ autocmd BufWritePre * :%s/\s\+$//e
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
-set tabstop=4
-set shiftwidth=4
-set expandtab 
-set noautoindent
+
+"Specify indentation
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smartindent
 
 let g:xml_syntax_folding=1
 let g:javaScript_fold=0
