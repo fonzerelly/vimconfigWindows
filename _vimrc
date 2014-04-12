@@ -1,40 +1,15 @@
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
-if (exists('*MyDiff')== 0)
-    set diffexpr=MyDiff()
-    function MyDiff()
-      let opt = '-a --binary '
-      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-      let arg1 = v:fname_in
-      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-      let arg2 = v:fname_new
-      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-      let arg3 = v:fname_out
-      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-      let eq = ''
-      if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-          let cmd = '""' . $VIMRUNTIME . '\diff"'
-          let eq = '"'
-        else
-          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
-      else
-        let cmd = $VIMRUNTIME . '\diff'
-      endif
-      execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-    endfunction
-endif
+"Added for Mac"
+set guifont=Courier:h18
 
 "Manually added"
 set number
 set nowrap
 set smartcase
 set incsearch
+
 "Set PASTE-Keymapping"
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -49,7 +24,7 @@ let g:javaScript_fold=0
 au FileType xml setlocal foldmethod=syntax
 execute pathogen#infect()
 syntax on
-filetype plugin indent on
+"filetype plugin indent on
 let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['vim'] }
@@ -75,6 +50,7 @@ noremap <leader>sv :source $MYVIMRC<cr>
 noremap <leader>o yi"<cr> :tabnew <c-r>"<cr>
 "follow link in help
 nnoremap <leader>f <c-]>
+nnoremap <leader>b <c-t>
 "include currentword in doublequotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 vnoremap <leader>" <esc>`>i"<esc>`<i"<esc>`>
