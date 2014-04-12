@@ -9,6 +9,7 @@ set number
 set nowrap
 set smartcase
 set incsearch
+autocmd BufWritePre * :%s/\s\+$//e
 
 "Set PASTE-Keymapping"
 nnoremap <F2> :set invpaste paste?<CR>
