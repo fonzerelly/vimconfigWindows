@@ -22,6 +22,10 @@ set softtabstop=2
 set expandtab
 set smartindent
 
+"Find tags file
+set tags=./tags,tags;$HOME
+noremap <leader>tags :!ctags -R -f ~/tags ~
+
 let g:xml_syntax_folding=1
 let g:javaScript_fold=0
 au FileType xml setlocal foldmethod=syntax
@@ -51,7 +55,7 @@ noremap <leader>ev :tabnew $MYVIMRC<cr>
 noremap <leader>sv :source $MYVIMRC<cr>
 "load file specified in doublequotes
 noremap <leader>o yi"<cr> :tabnew <c-r>"<cr>
-"follow link in help
+"follow link in help or tags
 nnoremap <leader>f <c-]>
 nnoremap <leader>b <c-t>
 "include currentword in doublequotes
@@ -89,8 +93,6 @@ inoremap <Right> <nop>
 "filetype related commenting
 :autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 :autocmd FileType javascript nnoremap <buffer> <localleader>C $F/F/2x
-:autocmd FileType javascript iabbrev def function
-:autocmd FileType javascript iabbrev ret return
 :autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
 :autocmd FileType python     nnoremap <buffer> <localleader>C F#x
 :autocmd FileType xml        nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
