@@ -24,7 +24,7 @@ set smartindent
 
 "Find tags file
 set tags=./tags,tags;$HOME
-noremap <leader>tags :!ctags -R -f ~/tags ~
+noremap <leader>tags :!ctags -R -f ~/tags ~<cr>
 
 let g:xml_syntax_folding=1
 let g:javaScript_fold=0
@@ -99,3 +99,4 @@ inoremap <Right> <nop>
 nnoremap <Leader>n :cnext<cr>
 nnoremap <Leader>N :cprev<cr>
 nnoremap <Leader>r "qdt,dwep"qp
+nnoremap <Leader>x :Explore<cr>
