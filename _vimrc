@@ -9,7 +9,10 @@ set number
 set nowrap
 set smartcase
 set incsearch
-autocmd BufWritePre * :%s/\s\+$//e
+augroup every_file
+  autocmd!
+  autocmd BufWritePre * :%s/\s\+$//e
+augroup END
 
 "Set PASTE-Keymapping"
 nnoremap <F2> :set invpaste paste?<CR>
@@ -17,25 +20,47 @@ set pastetoggle=<F2>
 set showmode
 
 "Specify indentation
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set smartindent
+augroup filtype_ruby
+  autocmd!
+  autocmd FileType ruby set tabstop=2
+  autocmd FileType ruby set shiftwidth=2
+  autocmd FileType ruby set softtabstop=2
+  autocmd FileType ruby set expandtab
+  autocmd FileType ruby set smartindent
+  autocmd FileType ruby :echom "Indentation set to Ruby"
+augroup END
+"
+augroup filtype_php
+  autocmd!
+  autocmd FileType php set tabstop=4
+  autocmd FileType php set shiftwidth=4
+  autocmd FileType php set softtabstop=4
+  autocmd FileType php set noexpandtab
+  autocmd FileType php set smartindent
+  autocmd FileType php :echom "Indentation set to PHP"
+augroup END
+
+augroup filtype_js
+  autocmd!
+  autocmd FileType javascript set tabstop=4
+  autocmd FileType javascript set shiftwidth=4
+  autocmd FileType javascript set softtabstop=4
+  autocmd FileType javascript set expandtab
+  autocmd FileType javascript set smartindent
+  autocmd FileType javascript :echom "Indentation set to JavaScript"
+augroup END
 
 "Find tags file
 set tags=./tags,tags;$HOME
-noremap <leader>tags :!ctags -R -f ~/tags ~<cr>
+noremap <leader>tg :!ctags -R -f ~/tags ~<cr>
 
-let g:xml_syntax_folding=1
-let g:javaScript_fold=0
-au FileType xml setlocal foldmethod=syntax
 execute pathogen#infect()
 syntax on
 "filetype plugin indent on
 let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['vim'] }
-let g:syntastic_javascript_checkers = ['jslint4java']
+let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_always_populate_loc_list = 1
 let mapleader = "-"
 let maplocalleader = "+"
@@ -90,12 +115,22 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
-"filetype related commenting
-:autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-:autocmd FileType javascript nnoremap <buffer> <localleader>C $F/F/2x
-:autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
-:autocmd FileType python     nnoremap <buffer> <localleader>C F#x
-:autocmd FileType xml        nnoremap <buffer> <localleader>c I<!--<esc>A--><esc>
+
+"duplicate braces
+inoremap ( ()<esc>i
+inoremap { {}<esc>i
+cnoremap ( ()<Left>
+cnoremap { {}<Left>
+
+"handle Command-Key of Mac
+nnoremap <D-8> [
+nnoremap <D-9> ]
+inoremap <D-8> []<esc>i
+inoremap <D-9> ]
+cnoremap <D-8> []<Left>
+cnoremap <D-9> ]
+
+
 nnoremap <Leader>n :cnext<cr>
 nnoremap <Leader>N :cprev<cr>
 nnoremap <Leader>r "qdt,dwep"qp
