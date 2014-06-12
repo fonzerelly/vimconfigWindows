@@ -116,18 +116,12 @@ inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
 
-"duplicate braces
-inoremap ( ()<esc>i
-inoremap { {}<esc>i
-cnoremap ( ()<Left>
-cnoremap { {}<Left>
-
 "handle Command-Key of Mac
 nnoremap <D-8> [
 nnoremap <D-9> ]
-inoremap <D-8> []<esc>i
+inoremap <D-8> [
 inoremap <D-9> ]
-cnoremap <D-8> []<Left>
+cnoremap <D-8> [
 cnoremap <D-9> ]
 
 
