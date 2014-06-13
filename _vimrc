@@ -61,7 +61,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['vim'] }
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_ruby_checkers = ['mri']
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_aggregate_errors=1
 let mapleader = "-"
 let maplocalleader = "+"
 "move line downwards
@@ -129,3 +131,7 @@ nnoremap <Leader>n :cnext<cr>
 nnoremap <Leader>N :cprev<cr>
 nnoremap <Leader>r "qdt,dwep"qp
 nnoremap <Leader>x :Explore<cr>
+
+"fugitive Helpers
+nnoremap <Leader>d :tabnew %<cr> :tabmove -1<cr> :Gdiff<cr>
+nnoremap <Leader>D :tabclose<cr>
