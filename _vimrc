@@ -19,36 +19,53 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
-"Specify indentation
-augroup filtype_ruby
-  autocmd!
-  autocmd FileType ruby set tabstop=2
-  autocmd FileType ruby set shiftwidth=2
-  autocmd FileType ruby set softtabstop=2
-  autocmd FileType ruby set expandtab
-  autocmd FileType ruby set smartindent
-  autocmd FileType ruby :echom "Indentation set to Ruby"
-augroup END
-"
-augroup filtype_php
-  autocmd!
-  autocmd FileType php set tabstop=4
-  autocmd FileType php set shiftwidth=4
-  autocmd FileType php set softtabstop=4
-  autocmd FileType php set noexpandtab
-  autocmd FileType php set smartindent
-  autocmd FileType php :echom "Indentation set to PHP"
-augroup END
 
-augroup filtype_js
-  autocmd!
-  autocmd FileType javascript set tabstop=4
-  autocmd FileType javascript set shiftwidth=4
-  autocmd FileType javascript set softtabstop=4
-  autocmd FileType javascript set expandtab
-  autocmd FileType javascript set smartindent
-  autocmd FileType javascript :echom "Indentation set to JavaScript"
-augroup END
+if has("autocmd")
+  filetype on
+
+  "Specify indentation
+  augroup filtype_ruby
+    autocmd!
+    autocmd FileType ruby set tabstop=2
+    autocmd FileType ruby set shiftwidth=2
+    autocmd FileType ruby set softtabstop=2
+    autocmd FileType ruby set expandtab
+    autocmd FileType ruby set smartindent
+    autocmd FileType ruby :echom "Indentation set to Ruby"
+  augroup END
+
+  augroup filtype_php
+    autocmd!
+    autocmd FileType php set tabstop=4
+    autocmd FileType php set shiftwidth=4
+    autocmd FileType php set softtabstop=4
+    autocmd FileType php set noexpandtab
+    autocmd FileType php set smartindent
+    autocmd FileType php :echom "Indentation set to PHP"
+  augroup END
+
+  augroup filtype_js
+    autocmd!
+    autocmd FileType js set tabstop=4
+    autocmd FileType js set shiftwidth=4
+    autocmd FileType js set softtabstop=4
+    autocmd FileType js set expandtab
+    autocmd FileType js set smartindent
+    autocmd FileType js :echom "Indentation set to JavaScript"
+  augroup END
+
+  augroup filetype_vimdeck
+    autocmd!
+    autocmd BufNewFile,BufRead *.vimdeck setfiletype markdown
+    autocmd FileType vimdeck :echom "Vimdeck is a markdown variant"
+  augroup END
+
+  augroup filetype_rabl
+    autocmd!
+    autocmd BufNewFile,BufRead *.rabl setfiletype ruby
+    autocmd FileType ruby :echom "Indentation set to Ruby"
+  augroup END
+endif
 
 "Find tags file
 set tags=./tags,tags;$HOME
@@ -61,7 +78,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['vim'] }
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers = ['mri']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors=1
 let mapleader = "-"
@@ -103,7 +120,7 @@ vnoremap kj <esc>
 vnoremap jk <esc>
 "vnoremap <esc> <nop>
 "modify .logfiles to keep only time outputs
-nnoremap <localleader>result :%s/^.* - //<cr> :%s/^\(.*ran for\)/ง\1/g<cr> :g/^[^ง]/d<cr> :%s/\D//g<cr> :nohlsearch<cr>
+nnoremap <localleader>result :%s/^.* - //<cr> :%s/^\(.*ran for\)/ยง\1/g<cr> :g/^[^ยง]/d<cr> :%s/\D//g<cr> :nohlsearch<cr>
 "delete whole file
 nnoremap <Leader>cl ggVGd<cr>
 "expand whole file
