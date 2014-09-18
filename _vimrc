@@ -44,19 +44,25 @@ if has("autocmd")
     autocmd FileType php :echom "Indentation set to PHP"
   augroup END
 
-  augroup filtype_js
+  augroup filtype_javascript
     autocmd!
-    autocmd FileType js set tabstop=4
-    autocmd FileType js set shiftwidth=4
-    autocmd FileType js set softtabstop=4
-    autocmd FileType js set expandtab
-    autocmd FileType js set smartindent
-    autocmd FileType js :echom "Indentation set to JavaScript"
+    autocmd FileType javascript set tabstop=2
+    autocmd FileType javascript set shiftwidth=2
+    autocmd FileType javascript set softtabstop=2
+    autocmd FileType javascript set expandtab
+    autocmd FileType javascript set smartindent
+    autocmd FileType javascript :echom "Indentation set to JavaScript"
   augroup END
 
   augroup filetype_vimdeck
     autocmd!
     autocmd BufNewFile,BufRead *.vimdeck setfiletype markdown
+
+    autocmd FileType vimdeck set tabstop=4
+    autocmd FileType vimdeck set shiftwidth=4
+    autocmd FileType vimdeck set softtabstop=4
+    autocmd FileType vimdeck set expandtab
+    autocmd FileType vimdeck set smartindent
     autocmd FileType vimdeck :echom "Vimdeck is a markdown variant"
   augroup END
 
@@ -65,7 +71,43 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.rabl setfiletype ruby
     autocmd FileType ruby :echom "Indentation set to Ruby"
   augroup END
+
+  augroup filetype_cucumber
+    autocmd!
+    autocmd FileType cucumber set tabstop=2
+    autocmd FileType cucumber set shiftwidth=2
+    autocmd FileType cucumber set softtabstop=2
+    autocmd FileType cucumber set expandtab
+    autocmd FileType cucumber set smartindent
+    autocmd FileType cucumber :echom "Indentation set to Cucumber"
+  augroup END
+
+  augroup filetype_haskell
+    autocmd!
+    autocmd FileType haskell set tabstop=3
+    autocmd FileType haskell set shiftwidth=3
+    autocmd FileType haskell set softtabstop=3
+    autocmd FileType haskell set expandtab
+    autocmd FileType haskell set smartindent
+    autocmd FileType haskell :echom "Indentation set to Haskell"
+  augroup END
+
+  augroup filetype_html
+    autocmd!
+    autocmd FileType html set tabstop=2
+    autocmd FileType html set shiftwidth=2
+    autocmd FileType html set softtabstop=2
+    autocmd FileType html set expandtab
+    autocmd FileType html set smartindent
+    autocmd FileType html :echom "Indentation set to HTML"
+  augroup END
 endif
+
+"folding settings
+set foldmethod=indent "fold based on indent
+set foldnestmax=10    "deepest fold is 10 levels
+set nofoldenable      "dont fold by default
+set foldlevel=1
 
 "Find tags file
 set tags=./tags,tags;$HOME
@@ -137,11 +179,18 @@ inoremap <Right> <nop>
 
 "handle Command-Key of Mac
 nnoremap <D-8> [
+nnoremap <D-5> [
 nnoremap <D-9> ]
+nnoremap <D-6> ]
 inoremap <D-8> [
+inoremap <D-5> [
 inoremap <D-9> ]
+inoremap <D-6> ]
 cnoremap <D-8> [
+cnoremap <D-5> [
 cnoremap <D-9> ]
+cnoremap <D-6> ]
+
 
 
 nnoremap <Leader>n :cnext<cr>
@@ -152,3 +201,5 @@ nnoremap <Leader>x :Explore<cr>
 "fugitive Helpers
 nnoremap <Leader>d :tabnew %<cr> :tabmove -1<cr> :Gdiff<cr>
 nnoremap <Leader>D :tabclose<cr>
+
+nnoremap <leader>bn :bn<cr> :SyntasticCheck<cr>
